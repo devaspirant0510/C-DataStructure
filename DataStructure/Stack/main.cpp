@@ -14,7 +14,7 @@ int main() {
 	stack.show();
 	pop = stack.pop();
 	cout << "»©³½ °ª : " << pop << endl;
-	stack.show();
+	stack.show);
 
 	
 	return 0;
