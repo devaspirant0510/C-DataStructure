@@ -13,9 +13,9 @@ class Stack {
 private:
 	int maxSize;
 	int top = -1;
-	T* stack;
 
 public:
+	T* stack;
 	Stack(int maxSize);
 	void error(char* err);
 	bool isEmpty();
@@ -25,11 +25,11 @@ public:
 	T pop();
 	void show();
 	T getTop();
+	T* getStack();
 };
 
 template <typename T>
 Stack<typename T>::Stack(int maxSize) {
-	cout << "stack size is " << maxSize << endl;
 	this->maxSize = maxSize;
 	this->stack = new T[maxSize];
 }
@@ -59,7 +59,6 @@ void Stack<typename T>::push(T t) {
 		error(STACK_IS_FULL);
 	}
 	else {
-		cout << "push stack " << t << endl;
 		stack[++top] = t;
 	}
 }
@@ -90,4 +89,9 @@ void Stack<typename T>::show() {
 		cout << " ¦¢ " << stack[i] << " ¦¢" << endl;
 	}
 	cout << " ¦±¦¬¦¬¦¬¦¥ " << endl;
+}
+
+template <typename T>
+T* Stack<typename T>::getStack() {
+	return stack;
 }
