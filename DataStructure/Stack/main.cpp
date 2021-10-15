@@ -3,10 +3,10 @@
 
 using namespace std;
 int main() {
-	Stack stack(3);
-	stack.push(3);
-	stack.push(5);
-	stack.push(7);
+	Stack<char> stack(3);
+	stack.push('+');
+	stack.push('s');
+	stack.push('-');
 	stack.show();
 	cout << "stack size " << stack.size() << endl;
 	int pop = stack.pop();
@@ -14,8 +14,7 @@ int main() {
 	stack.show();
 	pop = stack.pop();
 	cout << "빼낸 값 : " << pop << endl;
-	stack.show);
-
-	
+	stack.show();
+	cout << "현재 스택에서 가장 위에있는값 : " << stack.getTop() << endl;
 	return 0;
 }

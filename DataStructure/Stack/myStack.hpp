@@ -8,41 +8,52 @@ int MAX_STACK_SIZE = 1000;
 char STACK_IS_FULL[] = "error ! stack is full";
 char STACK_IS_EMPTY[] = "error ! stack is empty";
 
+template <typename T>
 class Stack {
 private:
 	int maxSize;
-	int *stack;
 	int top = -1;
+	T* stack;
 
 public:
 	Stack(int maxSize);
 	void error(char* err);
 	bool isEmpty();
 	bool isFull();
-	void push(int t);
+	void push(T t);
 	int size();
-	int pop();
+	T pop();
 	void show();
+	T getTop();
 };
 
-Stack::Stack(int maxSize = MAX_STACK_SIZE) {
+template <typename T>
+Stack<typename T>::Stack(int maxSize) {
 	cout << "stack size is " << maxSize << endl;
 	this->maxSize = maxSize;
-	this->stack = new int[maxSize];
+	this->stack = new T[maxSize];
 }
-void Stack::error(char* err) {
+template <typename T>
+void Stack<typename T>::error(char* err) {
 	cout << err << endl;
 	exit(1);
 }
-bool Stack::isEmpty() {
+template <typename T>
+bool Stack<typename T>::isEmpty() {
 	return top == -1;
 }
-bool Stack::isFull() {
+template <typename T>
+bool Stack<typename T>::isFull() {
 	return top+1 == maxSize;
 
 }
+template<typename T>
+T Stack<typename T>::getTop() {
+	return stack[top];
+}
 
-void Stack::push(int t) {
+template <typename T>
+void Stack<typename T>::push(T t) {
 	// stack 이 꽉차있을시 에러
 	if (isFull()) {
 		error(STACK_IS_FULL);
@@ -52,17 +63,24 @@ void Stack::push(int t) {
 		stack[++top] = t;
 	}
 }
-int Stack::pop() {
+template <typename T>
+T Stack<typename T>::pop() {
 	// stack이 비어있을시 에러
 	if (isEmpty()) {
 		error(STACK_IS_EMPTY);
 	}
 	return stack[top--];
 }
-int Stack::size() {
+//template <typename T>
+//T Stack<typename T>::top() {
+//	return 1;
+//}
+template <typename T>
+int Stack<typename T>::size() {
 	return top+1;
 }
-void Stack::show() {
+template <typename T>
+void Stack<typename T>::show() {
 	if (isEmpty()) {
 		cout << STACK_IS_EMPTY << endl;
 		return;

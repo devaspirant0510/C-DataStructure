@@ -1,3 +1,2 @@
 ﻿  main.cpp
-D:\seungho\Seoil\datastructure\DataStructure\Stack\main.cpp(17,12): error C2059: 구문 오류: ')'
-D:\seungho\Seoil\datastructure\DataStructure\Stack\main.cpp(17,13): error C3867: 'Stack::show': 비표준 구문입니다. '&'를 사용하여 멤버 포인터를 만드세요.
+  Stack.vcxproj -> D:\seungho\Seoil\datastructure\DataStructure\Debug\Stack.exe
