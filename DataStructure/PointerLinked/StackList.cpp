@@ -9,6 +9,14 @@ typedef struct StackEl {
 
 } StackEl;
 StackEl *header = NULL;
+
+int size(){
+    int count = 0;
+    for (StackEl* node = header; node!=NULL; node=node->address){
+        count++;
+    }
+    return count;
+}
 void push(int value){
     // define push value
     StackEl *push_value = (StackEl*)malloc(sizeof(StackEl));
@@ -34,17 +42,10 @@ int is_stack_empty(){
 
 void print_stack(){
     if(!is_stack_empty()){
-        StackEl *temp = header;
-        while(1){
-            if(temp->address==NULL){
-                cout << " | " <<  temp->el << " | " << endl;
-                cout << " ----------" << endl;
-                break;
-            }
-            cout << " | " <<  temp->el << " | " << endl;
-            temp = temp->address;
-
+        for (StackEl* node = header; node!=NULL; node=node->address){
+            cout << " | " << node->el << " | " << endl;
         }
+        cout << "------" << endl;
     }
     else{
         cout << "stack is empty" << endl;
@@ -54,7 +55,7 @@ void stack_test(){
     cout << " this is stack test program " << endl;
     int user_key;
     while(1){
-        cout << "0:exit \t 1:push \t 2:pop \t 3:print "<< endl << endl;
+        cout << "0:exit \t 1:push \t 2:pop \t 3:print \t 4:size "<< endl << endl;
         cout << "press key... ";
         cin >> user_key;
         if(user_key==0){
@@ -71,7 +72,11 @@ void stack_test(){
         }else if (user_key==3){
             print_stack();
             cout << endl;
-        }else{
+        }else if (user_key==4){
+            cout << size() << endl << endl;
+
+        }
+        else{
             cout << "error" << endl;
         }
         continue;
