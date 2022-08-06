@@ -8,9 +8,16 @@ void test(){
     LinkedList<int> list;
     int input;
     while(1){
-        cout <<"리스트 프로그램" << endl;
-        cout <<"1: 삽입, 2:삭제, 3:수정, 4: 인덱스값, 5: 값찾기, 6 : 출력, 0:종료"<< endl;
+        cout << "=====================================================================" << endl;
+        cout <<"| 리스트 프로그램                                                    |" << endl;
+        cout <<"| 1: 삽입, 2:삭제, 3:수정, 4: 인덱스값, 5: 값찾기, 6 : 출력, 0:종료  |"<< endl;
+        cout << "=====================================================================" << endl;
+        cout << "값을 입력하세요...";
         cin >> input;
+        if (input==0){
+            cout << "bye bye..." << endl;
+            return;
+        }
         if(input==1){
             int index,value;
             cout << "삽입할 위치를 입력하세요 : ";
@@ -25,6 +32,14 @@ void test(){
             cin >> index;
             int result = list.remove_list(index);
             cout << "remove value : " << result << endl;
+        }
+        if(input==3){
+            int index,value;
+            cout << "수정할 값의 위치를 입력하세요 : ";
+            cin >> index;
+            cout << "수정할 값의 입력하세요 : ";
+            cin >> value;
+            list.change_list(index, value);
         }
         if(input==4){
             int index;
