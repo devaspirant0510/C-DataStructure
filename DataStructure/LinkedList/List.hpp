@@ -12,8 +12,10 @@ struct Node{
 template<typename T>
 class LinkedList{
     public:
+        LinkedList();
+        void init_list();
         void print_list();//;
-        void insert_list(int,T);
+        T insert_list(int,T);
         void insert_list(T);
         void change_list(int,T);
         T remove_list(int);
@@ -24,13 +26,27 @@ class LinkedList{
         int get_size();
     private:
         Node<T> *header;
+        int valid_index(int);
 };
 
+template<typename T>
+int LinkedList<T>::valid_index(int index){
+    if(index<0 || index >= get_size()){
+        return 0;
+    }
+    return 1;
+}
+
+template<typename T>
+LinkedList<T>::LinkedList(){
+    header = NULL;
+}
 
 template<typename T>
 int LinkedList<T>::get_size(){
     int size = 0;
     Node<T> *temp_header = header;
+    cout << temp_header;
     while(temp_header!=NULL){
         temp_header=temp_header->next;
         size++;
@@ -61,25 +77,24 @@ T LinkedList<T>::get_list(int index){
 }
 
 template<typename T>
-void LinkedList<T>::insert_list(int index,T value){
-    if(index<0 || index>get_size()){
+T LinkedList<T>::insert_list(int index,T value){
+    if(valid_index(index)){
         cout << "out of index exception" << endl;
-        return;
+        return -123124;
     }
     if(get_size()==0){
         Node<T> *make_value =(Node<T>*) malloc(sizeof(Node<T>));
         make_value->value = value; 
         make_value->next = NULL;
         header = make_value;
-        cout << header->value ;
-        return;
+        return make_value->value;
     }
     if(index==0){
         Node<T> *make_value =(Node<T>*) malloc(sizeof(Node<T>));
         make_value->value = value; 
         make_value->next = header;
         header = make_value;
-        return;
+        return make_value->value;
     }
     Node<T> *temp_header = header;
     for (int i=0; i< index-1;i++){
@@ -89,6 +104,7 @@ void LinkedList<T>::insert_list(int index,T value){
     make_value->value = value; 
     make_value->next = temp_header->next;
     temp_header->next = make_value;
+    return make_value->value;
 }
 
 template<typename T>
