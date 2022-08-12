@@ -26,9 +26,17 @@ class LinkedList{
         int get_size();
     private:
         Node<T> *header;
+        void insert_node(T,Node<T>*);
         int valid_index(int);
 };
 
+template<typename T>
+void insert_node(T value,Node<T>* prev_node){
+    Node<T>* make_node = (Node<T>*)malloc(sizeof(Node<T>));
+    make_node->next = prev_node->next;
+    make_node->value = value;
+    prev_node->next = make_node;
+}
 template<typename T>
 int LinkedList<T>::valid_index(int index){
     if(index<0 || index >= get_size()){
@@ -46,7 +54,6 @@ template<typename T>
 int LinkedList<T>::get_size(){
     int size = 0;
     Node<T> *temp_header = header;
-    cout << temp_header;
     while(temp_header!=NULL){
         temp_header=temp_header->next;
         size++;
