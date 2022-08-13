@@ -45,10 +45,17 @@ void test(){
             int index;
             cout <<"get index : ";
             cin>>index;
-            cout << " you find get value is " << list.get_list(index) <<  endl;
+            if(list.get_node(index)!=NULL){
+                cout << " you find get value is " << list.get_node(index) <<  endl;
+            }else{
+                cout << "not have index value " << endl;
+            }
         }
         if(input==6){
             list.print_list();
+        }
+        if(input==7){
+            cout << "list size is " << list.get_size() << endl;
         }
         
 

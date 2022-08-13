@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <limits>
 
 using namespace std;
 
@@ -22,24 +23,35 @@ class LinkedList{
         T pop_list();
         T dequeue_list();
         int find_list(T);
-        T get_list(int);
+        Node<T>* get_node(int);
         int get_size();
     private:
         Node<T> *header;
-        void insert_node(T,Node<T>*);
+        void insert_node(Node<T>*,Node<T>*);
         int valid_index(int);
+        bool has_header();
 };
 
+
 template<typename T>
-void insert_node(T value,Node<T>* prev_node){
-    Node<T>* make_node = (Node<T>*)malloc(sizeof(Node<T>));
-    make_node->next = prev_node->next;
-    make_node->value = value;
-    prev_node->next = make_node;
+bool LinkedList<T>::has_header(){
+    if(header!=NULL){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+template<typename T>
+void LinkedList<T> :: insert_node(Node<T>* to_insert_node,Node<T>* prev_node){
+    // 리스트의 끝에 삽입할경우 prev_node 의 next 는  null 이라 삽입할 node의 next 는 null 이 되고
+    // prev_node 의 next 를 삽입할 노드로 할당
+    to_insert_node->next = prev_node->next;
+    prev_node->next = to_insert_node;
 }
 template<typename T>
 int LinkedList<T>::valid_index(int index){
-    if(index<0 || index >= get_size()){
+    if(index>=0 && index <= get_size()){
         return 0;
     }
     return 1;
@@ -74,13 +86,21 @@ int LinkedList<T>::find_list(T find_value){
     return -1;
 }
 
+
 template<typename T>
-T LinkedList<T>::get_list(int index){
+Node<T>* LinkedList<T>::get_node(int index){
+    if(!has_header()){
+        cout << "not have header" << endl;
+        return NULL;
+    }
     Node<T>* temp_header = header;
     for(int i=0; i < index; i++){
+        if(temp_header->next==NULL){
+            return NULL;
+        }
         temp_header = temp_header->next;
     }
-    return temp_header->value;
+    return temp_header;
 }
 
 template<typename T>
@@ -103,14 +123,10 @@ T LinkedList<T>::insert_list(int index,T value){
         header = make_value;
         return make_value->value;
     }
-    Node<T> *temp_header = header;
-    for (int i=0; i< index-1;i++){
-        temp_header = temp_header->next;
-    }
+    Node<T>* prev_node = get_node(index-1);
     Node<T> *make_value =(Node<T>*) malloc(sizeof(Node<T>));
-    make_value->value = value; 
-    make_value->next = temp_header->next;
-    temp_header->next = make_value;
+    make_value->value = value;
+    insert_node(make_value,prev_node);
     return make_value->value;
 }
 
