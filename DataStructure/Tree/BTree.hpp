@@ -18,6 +18,7 @@ class BTree{
         int count_node(TreeNode<T>* node); // 노드 개수
         int count_edge(); // 간선 개수
         int count_leaf(); // 단말노드 개수
+        int get_height(TreeNode<T>*); // 트리 높이
         void preorder(TreeNode<T>*); // 전위 순회 VLR
         void inorder(TreeNode<T>*); // 중위 순회 LVR
         void postorder(TreeNode<T>*); // 후위 순회 LRV
@@ -26,6 +27,16 @@ class BTree{
     private:
 
 };
+
+template<typename T>
+int BTree<T>::get_height(TreeNode<T>* node){
+    if (node==NULL){
+        return 0;
+    }
+    int left_node_height = get_height(node->left_tree);
+    int right_node_height = get_height(node->right_tree);
+    return (left_node_height>right_node_height)?left_node_height+1:right_node_height+1;
+}
 
 template<typename T>
 TreeNode<T>* BTree<T>::create_tree(T* value,TreeNode<T>* left_node,TreeNode<T>* right_node){
