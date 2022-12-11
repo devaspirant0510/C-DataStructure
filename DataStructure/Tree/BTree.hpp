@@ -1,6 +1,7 @@
 #pragma once
 
 #include<iostream>
+#include <queue>
 
 using namespace std;
 
@@ -26,8 +27,10 @@ class BTree{
         void inorder(TreeNode<T>*); // 중위 순회 LVR
         void postorder(TreeNode<T>*); // 후위 순회 LRV
         void print_tree(TreeNode<T>*);
+        void print2_tree();
         TreeNode<T>* root = NULL;
     private:
+        int temp_node[1000];
 
 };
 template<typename T>
@@ -107,5 +110,25 @@ void BTree<T>::print_tree(TreeNode<T> *node){
     cout << *(node->value) << endl;
     print_tree(node->left_tree);
     print_tree(node->right_tree);
+
+}
+
+template<typename T>
+void BTree<T>::print2_tree(){
+    queue<TreeNode<T>*> qu;
+    qu.push(this->root);
+    TreeNode<T>* n;
+    while(!qu.empty()){
+        n = qu.front();
+        qu.pop();
+        if(n!=NULL){
+            cout << *(n->value) << " " ;
+            qu.push(n->left_tree);
+            qu.push(n->right_tree);
+        }
+
+    }
+    cout << endl;
+
 
 }
