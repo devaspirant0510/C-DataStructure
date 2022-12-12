@@ -121,10 +121,13 @@ void BTree<T>::print2_tree(){
     while(!qu.empty()){
         n = qu.front();
         qu.pop();
+        
         if(n!=NULL){
             cout << *(n->value) << " " ;
             qu.push(n->left_tree);
             qu.push(n->right_tree);
+        }else{
+            cout << ". ";
         }
 
     }

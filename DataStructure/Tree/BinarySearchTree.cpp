@@ -23,17 +23,34 @@ int main(){
     TreeNode<int>* b = bstree.create_tree(&b_v,NULL,NULL);
     TreeNode<int>* c = bstree.create_tree(&c_v,NULL,NULL);
     bstree.set_root(&a_v,b,c);
-    bstree.print2_tree();
+    bstree.test_insert(bstree.root,4);
     int insert_ = 1;
     TreeNode<int>* insert_val = bstree.create_tree(&insert_,NULL,NULL);
     bstree.insert(bstree.root,insert_val);
+    int insert_2 = 15;
+    TreeNode<int>* insert_val2 = bstree.create_tree(&insert_2,NULL,NULL);
+    bstree.insert(bstree.root,insert_val2);
+    int insert_3 = -3;
+    TreeNode<int>* insert_val3 = bstree.create_tree(&insert_3,NULL,NULL);
+    bstree.insert(bstree.root,insert_val3);
+    int insert_4 = 7;
+    TreeNode<int>* insert_val4 = bstree.create_tree(&insert_4,NULL,NULL);
+    bstree.insert(bstree.root,insert_val4);
     bstree.print2_tree();
-    bstree.test_insert(bstree.root,4);
+
+bstree.remove_answer(bstree.root,insert_val4);
     bstree.print2_tree();
-    bstree.test_insert(bstree.root,6);
-    bstree.print2_tree();
-    bstree.test_insert(bstree.root,11);
-    bstree.print2_tree();
+
+
+
+
+
+
+    // bstree.print2_tree();
+    // bstree.test_insert(bstree.root,11);
+    // bstree.print2_tree();
+    // bstree.test_insert(bstree.root,-10);
+    // bstree.print2_tree();
     //bstree.remove(bstree.root,8);
     return 0;
 }

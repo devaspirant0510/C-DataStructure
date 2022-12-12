@@ -11,11 +11,22 @@ class BSTree:public BTree<T>{
         int insert(TreeNode<T>*,TreeNode<T>*);
         int test_insert(TreeNode<T>*,T);
         int remove(TreeNode<T>*, T);
+        void remove_answer(TreeNode<T>*,TreeNode<T>*);
+        //void remove_answer(TreeNode<T>*,T);
 
     private:
         int insert_refer(TreeNode<T>*,T&);
         TreeNode<T>** search_return(TreeNode<T>*,TreeNode<T>*,T);
 };
+
+// template<typename T>
+// void BSTree<T>::remove_answer(TreeNode<T>* root,T value){
+//     int* a = new int;
+//     *a = value;
+//     TreeNode<T>** result = search_return(root,&a);
+//     remove_answer(*(result),*(result+1));
+
+// }
 
 template<typename T>
 int BSTree<T>::remove(TreeNode<T>* root,T value){
@@ -57,6 +68,52 @@ int BSTree<T>::remove(TreeNode<T>* root,T value){
 
     }
     return 1;
+}
+template<typename T>
+void BSTree<T>::remove_answer(TreeNode<T> *parent,TreeNode<T> *node){
+    TreeNode<T> *child,*succ,*succp;
+    child = succ = succp = NULL;
+    if(node->left_tree==NULL && node->right_tree==NULL){
+        if(parent==NULL){
+            this->root = NULL;
+        }else{
+            if(parent->left_tree==node){
+                parent->left_tree = NULL;
+            }else{
+                parent->right_tree=NULL;
+            }
+        }
+    }
+    else if(node->left_tree==NULL && node->right_tree==NULL){
+        child = (node->left_tree!=NULL)?node->left_tree:node->right_tree;
+        if(node==this->root){
+            this->root=child;
+        }
+        else{
+            if(parent->left_tree==node){
+                parent->left_tree = child;
+            }else{
+                parent->right_tree = child;
+            }
+        }
+    }
+    else{
+        succp=node;
+        succ = node->right_tree;
+        while(succ->left_tree!=NULL){
+            succp = succ;
+            succ = succ->left_tree;
+        }
+        if(succp->left_tree==succ){
+            succp->left_tree = succ->right_tree;
+        }else{
+            succp->right_tree = succ->right_tree;
+        }
+        node->value = succ->value;
+        node = succ;
+    }
+    delete node;
+
 }
 template<typename T>
 int BSTree<T>::search(TreeNode<T>* root,T value){
@@ -139,23 +196,23 @@ int BSTree<T>::test_insert(TreeNode<T>* r,T val){
 
 template<typename T>
 int BSTree<T>::insert(TreeNode<T>* r,TreeNode<T>* v){
-    /*if(*(r->value)==*(v->value)){
-        return 0;
-    }
-    if(*(r->value)>*(v->value)){
-        if(r->left_tree!=NULL){
-            insert(r->left_tree,v);
-        }else{
-            r->left_tree = v;
-        }
-    }else{
-        if(r->right_tree!=NULL){
-            insert(r->right_tree,v);
-        }else{
-            r->left_tree = v;
-        }
+    // if(*(r->value)==*(v->value)){
+    //     return 0;
+    // }
+    // if(*(r->value)>*(v->value)){
+    //     if(r->left_tree!=NULL){
+    //         insert(r->left_tree,v);
+    //     }else{
+    //         r->left_tree = v;
+    //     }
+    // }else{
+    //     if(r->right_tree!=NULL){
+    //         insert(r->right_tree,v);
+    //     }else{
+    //         r->right_tree = v;
+    //     }
 
-    }*/
+    // }
 
     TreeNode<T>* temp = this->root;
     //validation
