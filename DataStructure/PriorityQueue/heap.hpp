@@ -25,13 +25,13 @@ int Heap::insert(int value){
     if(heap_size==0){
         heap[0] = value;
         heap_size++;
+        return 1;
     }
     int low_pos = ++heap_size;
-    while(low_pos!=1 && heap[low_pos/2]>value){
+    while(low_pos!=1 && heap[low_pos/2]<value){
+        heap[low_pos] = heap[low_pos/2];
         low_pos/=2;
-        heap[low_pos*2] = heap[low_pos];
-        heap[low_pos] = value;
     }
-
-
+    heap[low_pos] = value;
+    return 1;
 }
