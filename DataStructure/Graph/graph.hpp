@@ -14,6 +14,7 @@ class Graph{
 		int insert_edge2(int,int,int);
 		int insert_vertex(char);
 		int remove_edge(int,int);
+		int find_connected_component(int );
 		int is_full();
 		void DFS(int);
 		void BFS(int);
@@ -24,6 +25,16 @@ class Graph{
 		char vdata[MAX_SIZE];
 		int visitied[MAX_SIZE] = {0,};
 };
+
+int Graph::find_connected_component(int val ){
+	for(int i=0; i<vsize; i++){
+		if(visitied[i]==0){
+			BFS(i);
+			cout << endl;
+		}
+	}
+
+}
 
 void Graph::DFS(int v){
 	visitied[v] = 1;

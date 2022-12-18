@@ -17,11 +17,11 @@ int main(){
 	//graph.insert_edge2(0,1,1);//a-b
 	graph.insert_edge2(2,0,5);//c-a
 	graph.insert_edge2(1,2,1);//b-c
-	graph.insert_edge2(3,2,5);//d-c
+	//graph.insert_edge2(3,2,5);//d-c
 	graph.insert_edge2(4,3,11);//e-d
-	graph.insert_edge2(4,5,-3);
-	graph.insert_edge2(5,2,2);
+	graph.insert_edge2(4,5,-3);//e-f
+	//graph.insert_edge2(5,1,2);//f-b
 	
 	graph.print();
-	graph.BFS(0);
+	graph.find_connected_component(0);
 }
