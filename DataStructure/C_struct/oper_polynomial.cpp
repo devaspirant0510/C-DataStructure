@@ -4,9 +4,14 @@
 
 using namespace std;
 
+
 int main(){
-    Polynomial pol;
-    pol.input();
-    pol.print();
+    Polynomial a;
+    a.input();
+    a.print();
+    Polynomial b;
+    b.input();
+    b.print();
+    cout << a*b << endl;
     return 0;
 }
