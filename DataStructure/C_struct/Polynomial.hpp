@@ -16,8 +16,9 @@ class Polynomial{
         Polynomial();
         Polynomial(expression*);
         ~Polynomial();
-        void input();
+        expression* input();
         void print();
+        void op_machine();
         friend Polynomial operator+(Polynomial a,Polynomial b);
         friend Polynomial operator*(Polynomial a,Polynomial b);
         friend ostream& operator<<(ostream&,Polynomial);
@@ -35,6 +36,13 @@ Polynomial::Polynomial(){
 Polynomial::~Polynomial(){
     // cout << "destroy"<< endl;
     // exp = NULL;
+}
+void Polynomial::op_machine(){
+    char input_data;
+    while(1){
+        cin >> input
+
+    }
 }
 
 
@@ -68,9 +76,11 @@ Polynomial operator+(Polynomial a,Polynomial b){
     Polynomial res;
     expression* res_exp = new expression;
     res.exp = res_exp;
+    // a 의 차수가 더 클경우
     if (a.exp->degree>b.exp->degree){
         res = a;
         for (int i=0; i<b.exp->degree; i++){
+            // a 차수 - b 차수 => 연산되는 차수
             res.exp->coef[i+(a.exp->degree-b.exp->degree)]+=b.exp->coef[i];
         }
     }else{
@@ -80,6 +90,7 @@ Polynomial operator+(Polynomial a,Polynomial b){
         }
 
     }
+    delete res_exp;
     return res;
     // if(a.exp->degree<b.exp->degree){
     //     Polynomial tmp;
